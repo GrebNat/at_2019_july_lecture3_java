@@ -9,10 +9,9 @@ public class RestCountriesSteps {
 
 	public CountryDto[] getCountryByName(String name) {
 		return
-				new Gson().fromJson(
-						new RestCountriesService()
+				new RestCountriesService()
 						.getNoParams(String.format(URI.GET_BY_COUNTRY_NAME_URI, name))
-						.getBody().asString(), CountryDto[].class);
+						.getBody().as(CountryDto[].class);
 	}
 
 	public CountryDto[] getCountryByCode(String code) {
@@ -22,7 +21,7 @@ public class RestCountriesSteps {
 		return
 				new Gson().fromJson(
 						new RestCountriesService()
-						.getWithParams(URI.GET_BY_COUNTRY_CODE_URI, params)
-						.getBody().asString(), CountryDto[].class);
+								.getWithParams(URI.GET_BY_COUNTRY_CODE_URI, params)
+								.getBody().asString(), CountryDto[].class);
 	}
 }

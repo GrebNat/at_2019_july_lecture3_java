@@ -1,13 +1,12 @@
 package countries.functional_level;
 
 import countries.dto.CountryDto;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 import countries.service.RestCountriesAssertions;
 import countries.service.RestCountriesSteps;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class GetCountriesCountByCode {
 
@@ -23,8 +22,7 @@ public class GetCountriesCountByCode {
 	}
 
 	@Test(description = "Get country by one Code")
-	void getCountryByCode()
-	{
+	void getCountryByCode() {
 		String countryCode = "rus";
 		String countryName = "Russia";
 
@@ -44,7 +42,8 @@ public class GetCountriesCountByCode {
 				.getCountryByCode(countryCode);
 
 		new RestCountriesAssertions(countries)
-				.verifyCountries(countryName);
+				.verifyCountry(countryName)
+				.verifyCountries(countryName, countryName);
 	}
 
 	@Test(description = "Get country by one Code")
@@ -63,16 +62,17 @@ public class GetCountriesCountByCode {
 	@DataProvider
 	public Object[][] countriesData() {
 		return new Object[][]{
-				{"rus", "Russia"},
-				{"rus;nor", "Russia", "Norway"},
-				{"rus;nor", "Russia", "Norway"},
-				{"rus;nor", "Angola", "Norway"},
-				{"rus;nor", "Russia", "Norway"},
+				{"145","rus", "Russia"},
+				{"4858","rus;nor", "Russia", "Norway"},
+				{"6869","rus;nor", "Russia", "Norway"},
+				{"9373","ua", "Ukraine"},
+				{"4749","rus;nor", "Angola", "Norway"},
+				{"5968","rus;nor", "Russia", "Norway"},
 		};
 	}
 
 	@Test(description = "Get country by one Code", dataProvider = "countriesData")
-	void getCountryByTwoCodeMultiple(String countryCodes, String... expectedCountriesNames) {
+	void getCountryByTwoCodeMultiple(String testId, String countryCodes, String... expectedCountriesNames) {
 
 		CountryDto[] countries = new RestCountriesSteps()
 				.getCountryByCode(countryCodes);

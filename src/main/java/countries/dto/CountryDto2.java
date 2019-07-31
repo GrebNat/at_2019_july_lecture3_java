@@ -3,7 +3,7 @@ package countries.dto;
 import countries.dto.subentity.Translations;
 
 import java.util.List;
-
+import java.util.Objects;
 
 public class CountryDto2 {
 	private String name;
@@ -104,8 +104,9 @@ public class CountryDto2 {
 		return population;
 	}
 
-	public void setPopulation(Long population) {
+	public CountryDto2 setPopulation(Long population) {
 		this.population = population;
+		return this;
 	}
 
 	public List<Float> getLatlng() {
@@ -178,5 +179,34 @@ public class CountryDto2 {
 
 	public void setLanguages(List<String> languages) {
 		this.languages = languages;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		CountryDto2 that = (CountryDto2) o;
+		return Objects.equals(name, that.name) &&
+				Objects.equals(capital, that.capital) &&
+				Objects.equals(altSpellings, that.altSpellings) &&
+				Objects.equals(relevance, that.relevance) &&
+				Objects.equals(region, that.region) &&
+				Objects.equals(subregion, that.subregion) &&
+				Objects.equals(translations, that.translations) &&
+				Objects.equals(population, that.population) &&
+				Objects.equals(latlng, that.latlng) &&
+				Objects.equals(demonym, that.demonym) &&
+				Objects.equals(area, that.area) &&
+				Objects.equals(gini, that.gini) &&
+				Objects.equals(timezones, that.timezones) &&
+				Objects.equals(callingCodes, that.callingCodes) &&
+				Objects.equals(topLevelDomain, that.topLevelDomain) &&
+				Objects.equals(currencies, that.currencies) &&
+				Objects.equals(languages, that.languages);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, capital, altSpellings, relevance, region, subregion, translations, population, latlng, demonym, area, gini, timezones, callingCodes, topLevelDomain, currencies, languages);
 	}
 }

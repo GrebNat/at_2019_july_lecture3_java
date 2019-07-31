@@ -2,6 +2,7 @@ package countries.dto;
 
 import countries.dto.subentity.Translations;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Accessors(chain = true)
 public class CountryDto {
 	private String name;
 	private String capital;

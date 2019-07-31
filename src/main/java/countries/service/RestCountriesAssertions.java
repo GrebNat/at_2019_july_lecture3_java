@@ -14,9 +14,10 @@ public class RestCountriesAssertions {
 		this.counties = response;
 	}
 
-	public void verifyCountry(String countryName) {
+	public RestCountriesAssertions verifyCountry(String countryName) {
 		assertEquals(counties.length, 1, "Incorrect list of countries size");
 		assertEquals(counties[0].getName(), countryName, "Incorrect county name");
+		return this;
 	}
 
 	public void verifyCountries(String... countryName) {

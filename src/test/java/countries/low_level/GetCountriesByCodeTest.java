@@ -9,7 +9,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
@@ -53,15 +52,16 @@ public class GetCountriesByCodeTest {
 				.header("X-RapidAPI-Key", "4b878bce9bmshe4d66d5adfc366fp12bc6ejsnbbdd67752f91");
 
 		requestSpecification
-				.param("codes", "co;nor")
-				.get("https://restcountries-v1.p.rapidapi.com/alpha/")
+				     .param("codes", "co;nor")
+				     .get("https://restcountries-v1.p.rapidapi.com/alpha/")
 				.then()
-				.statusCode(200).and()
-				.body("name[0]", is("Colombia"))
-				.body("name[1]", is("Norway"))
-				.body("name", is(asList("Colombia", "Norway")))
-				.body("altSpellings[0]", hasItem("CO"))
-				.body("name", not("Russia"));
+				   .statusCode(400).and()
+				   .body("name[0]", is("Colombia"))
+				   .body("name[1]", is("Norway"))
+				   .body("name", is(asList("Colombia", "Norway")))
+				   .body("altSpellings[0]", hasItem("CO"))
+				   .body("translations[0].de", is("jjjj"))
+				   .body("name", not("Russia"));
 	}
 
 	@Test(description = "Get country by one code")
